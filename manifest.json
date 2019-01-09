@@ -1,0 +1,22 @@
+{
+    "js": [
+        "js/LayersInit.js",
+        "js/MapOpacitySlider.js",
+        "js/main.js"
+    ],
+    "css": [
+        "resources/css/opacityslider.css"
+    ],
+    "default_options": {},
+    "i18n": {
+        "en": {
+
+        },
+        "es": {
+
+        },
+        "fr": {
+
+        }
+    }
+}

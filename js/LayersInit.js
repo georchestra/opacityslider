@@ -73,29 +73,50 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
         var records = [], record;
         var count = 0;
         Ext.each(this.layersCfg, function(item) {
-            record = stores[item.url].queryBy(function(r) {
-                return (r.get('name') == item.name);
-            }).first();
-            if (record) {
-                record.getLayer().params.FORMAT = 'image/jpeg';
-                record.getLayer().gutter = 0;
-
-                if(item.title) {
-                    record.set('title', item.title);
-                    record.getLayer().name = item.title;
-                }
-                // Not sure this is really useful:
-                if(item.url.indexOf('gwc') > 0) {
-                    record.set('type', 'GWC');
-                }
-                // set metadataURLs in record, data comes from GeoNetwork
-                // FIXME: could probably be obtained from capabilities document
-                if (item.metadataURLs) {
-                    record.set("metadataURLs", item.metadataURLs);
-                }
+            if (item.type == "XYZ") {
+                // assumes spherical mercator map
+                var layer = new OpenLayers.Layer.XYZ(
+                    item.title,
+                    item.url, {
+                        sphericalMercator: true
+                    }
+                ),
+                recordType = GEOR.util.createRecordType(
+                    GEOR.ows.getRecordFields()
+                ),
+                record = new recordType({
+                    title: item.title,
+                    layer: layer,
+                    attribution: {
+                        title: item.attribution || (Ext.isArray(item.url) ?
+                          item.url[0] : item.url)
+                    },
+                    llbbox: [-180,-85,180,85] // the mercator world
+                }, layer.id);
                 records.push(record);
-            } else if (item.type == "XYZ") {
-                // TODO
+            } else {
+                record = stores[item.url].queryBy(function(r) {
+                    return (r.get('name') == item.name);
+                }).first();
+                if (record) {
+                    record.getLayer().params.FORMAT = 'image/jpeg';
+                    record.getLayer().gutter = 0;
+
+                    if (item.title) {
+                        record.set('title', item.title);
+                        record.getLayer().name = item.title;
+                    }
+                    // Not sure this is really useful:
+                    if (item.url.indexOf('gwc') > 0) {
+                        record.set('type', 'GWC');
+                    }
+                    // set metadataURLs in record, data comes from GeoNetwork
+                    // FIXME: could probably be obtained from capabilities document
+                    if (item.metadataURLs) {
+                        record.set("metadataURLs", item.metadataURLs);
+                    }
+                    records.push(record);
+                }
             }
         });
 

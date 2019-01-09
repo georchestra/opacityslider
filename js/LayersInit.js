@@ -27,19 +27,13 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
 
     /**
      * Property: layerStore
-     * {GeoExt.data.LayerStore} The application's layer store.
-     */
-    mapLayerStore: null,
-
-    /**
-     * Property: layerStore
-     * {GeoExt.data.LayerStore} The application's layer store.
+     * {GeoExt.data.LayerStore}
      */
     layerStore: null,
 
     /**
-     * Property: initState
-     * {Array} shorthand for GEOR.initstate
+     * Property: layersCfg
+     * {Array}
      */
     layersCfg: null,
 
@@ -54,7 +48,7 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
      * Convenience method for getting unique WMS server URLs
      *
      * Parameters:
-     * initState - {Array} GEOR.initstate array
+     * layersCfg - {Array}
      *
      * Returns:
      * {Object} a hash with keys "WMSLayer" and "WMS" indexing arrays of
@@ -90,7 +84,7 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
             if (record) {
                 record.getLayer().params.FORMAT = 'image/jpeg';
                 record.getLayer().gutter = 0;
-                
+
                 if(item.title) {
                     record.set('title', item.title);
                     record.getLayer().name = item.title;
@@ -98,7 +92,7 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
                 if(item.url.indexOf('gwc') > 0) {
                     record.set('type', 'GWC');
                 }
-                
+
                 // set metadataURLs in record, data comes from GeoNetwork
                 if (item.metadataURLs) {
                     record.set("metadataURLs", item.metadataURLs);
@@ -107,8 +101,6 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
             }
         });
 
-        // check their srs against map's srs
-        var srs = this.mapLayerStore.map.getProjection();
         Ext.each(records, function(record) {
             count += 1;
             this.layerStore.add(record);
@@ -119,7 +111,7 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
 
     /**
      * Method: createStores
-     * Method responsible for creating WMSCapabilities or 
+     * Method responsible for creating WMSCapabilities or
      * WMTSCapabilitiesstores (if url contains 'wmts')
      * When all done, executes a given callback
      *
@@ -169,14 +161,14 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
         var wmsServers = this.getUniqueWmsServers(this.layersCfg);
         this.createStores(wmsServers['WMSLayer'], this.updateStoreFromWMSLayer);
     },
-    
+
     constructor: function(config) {
         Ext.apply(this, config);
         this.tr = OpenLayers.i18n;
         this.layerStore = new GeoExt.data.LayerStore();
-        
+
         this.addEvents('load');
-        
+
         GEOR.LayersInit.superclass.constructor.apply(this, arguments);
     }
 });

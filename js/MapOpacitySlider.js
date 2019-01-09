@@ -48,7 +48,6 @@ GEOR.MapOpacitySlider = Ext.extend(Ext.Toolbar, {
         // Retrieve all informations from capability documents of all layers in configuration options
         var layersInitModule = new GEOR.LayersInit({
             layersCfg: this.layersCfg,
-            mapLayerStore: this.mapPanel.layers,
             listeners: {
                 load: {
                     fn : function(store) {

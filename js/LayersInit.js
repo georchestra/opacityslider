@@ -38,42 +38,37 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
     layersCfg: null,
 
     /**
-     * Property: tr
-     * {Function} an alias to OpenLayers.i18n
-     */
-    tr: null,
-
-    /**
-     * Method: getUniqueWmsServers
-     * Convenience method for getting unique WMS server URLs
+     * Method: getUniqueOGCServers
+     * Convenience method for getting unique server URLs
      *
      * Parameters:
      * layersCfg - {Array}
      *
      * Returns:
-     * {Object} a hash with keys "WMSLayer" and "WMS" indexing arrays of
-     *          unique WMS server URLs
+     * {Object} a hash with keys "WMS" and "WMTS" indexing arrays of
+     *          unique OGC server URLs
      */
-    getUniqueWmsServers: function(layersCfg) {
+    getUniqueOGCServers: function(layersCfg) {
         var t = {
-            "WMSLayer": []
+            "WMS": [],
+            "WMTS": []
         };
         Ext.each(layersCfg, function(item) {
-            if (item.url && t["WMSLayer"].indexOf(item.url)< 0) {
-                t["WMSLayer"].push(item.url);
+            if (item.url && t[item.type] && t[item.type].indexOf(item.url)< 0) {
+                t[item.type].push(item.url);
             }
         });
         return t;
     },
 
     /**
-     * Method: updateStoreFromWMSLayer
-     * Handles addition of WMS layers to map
+     * Method: updateLayerStore
+     * Handles addition of records to LayersInit's main layerStore
      *
      * Parameters:
      * stores - {Object} Hash containing stores keyed by server url
      */
-    updateStoreFromWMSLayer: function(stores) {
+    updateLayerStore: function(stores) {
         // extract from stores layers which were initially requested
         var records = [], record;
         var count = 0;
@@ -89,15 +84,18 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
                     record.set('title', item.title);
                     record.getLayer().name = item.title;
                 }
+                // Not sure this is really useful:
                 if(item.url.indexOf('gwc') > 0) {
                     record.set('type', 'GWC');
                 }
-
                 // set metadataURLs in record, data comes from GeoNetwork
+                // FIXME: could probably be obtained from capabilities document
                 if (item.metadataURLs) {
                     record.set("metadataURLs", item.metadataURLs);
                 }
                 records.push(record);
+            } else if (item.type == "XYZ") {
+                // TODO
             }
         });
 
@@ -120,51 +118,54 @@ GEOR.LayersInit = Ext.extend(Ext.util.Observable, {
      * callback - {Function} The callback
      *            (which takes a *stores* object as argument)
      */
-    createStores: function(wmsServers, callback, scope) {
-        var count = wmsServers.length;
+    createStores: function(servers) {
+        var count = servers["WMS"].length + servers["WMTS"].length;
         var stores = {};
         var capabilitiesCallback = function() {
             count -= 1;
             if (count === 0) {
-                this.updateStoreFromWMSLayer(stores);
+                this.updateLayerStore(stores);
             }
         };
-        Ext.each(wmsServers, function(wmsServerUrl) {
+        Ext.each(servers["WMS"], function(url) {
             GEOR.waiter.show();
-            var u = GEOR.util.splitURL(wmsServerUrl);
-            var serviceURL = u.serviceURL.replace(':443', '');
-            var options = {
-                    storeOptions: {
-                        url: serviceURL
-                    },
-                    baseParams: u.params,
-                    success: capabilitiesCallback,
-                    failure: capabilitiesCallback,
-                    scope: this
-                };
-            if(wmsServerUrl.indexOf('wmts')>0) {
-                stores[wmsServerUrl] = new GEOR.ows.WMTSCapabilities(options);
-            } else {
-                stores[wmsServerUrl] = new GEOR.ows.WMSCapabilities(options);
-            }
+            var u = GEOR.util.splitURL(url);
+            stores[url] = new GEOR.ows.WMSCapabilities({
+                storeOptions: {
+                    url: u.serviceURL.replace(':443', '')
+                },
+                baseParams: u.params,
+                success: capabilitiesCallback,
+                failure: capabilitiesCallback,
+                scope: this
+            });
+        }, this);
+        Ext.each(servers["WMTS"], function(url) {
+            GEOR.waiter.show();
+            var u = GEOR.util.splitURL(url);
+            stores[url] = new GEOR.ows.WMTSCapabilities({
+                storeOptions: {
+                    url: u.serviceURL.replace(':443', '')
+                },
+                baseParams: u.params,
+                success: capabilitiesCallback,
+                failure: capabilitiesCallback,
+                scope: this
+            });
         }, this);
     },
 
     /**
      * Method: loadLayers
-     * Load WMS layers.
-     *
-     * Parameters:
-     * initState - {Array} GEOR.initstate array
+     * Load layers from capabilities documents
      */
     loadLayers: function() {
-        var wmsServers = this.getUniqueWmsServers(this.layersCfg);
-        this.createStores(wmsServers['WMSLayer'], this.updateStoreFromWMSLayer);
+        var servers = this.getUniqueOGCServers(this.layersCfg);
+        this.createStores(servers);
     },
 
     constructor: function(config) {
         Ext.apply(this, config);
-        this.tr = OpenLayers.i18n;
         this.layerStore = new GeoExt.data.LayerStore();
 
         this.addEvents('load');

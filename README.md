@@ -9,7 +9,7 @@ authors: @fgravin
 
 The addon config should look like this:
 
-```js
+```json
 {
     "id": "opacityslider_0",
     "name": "OpacitySlider",
@@ -25,21 +25,25 @@ The addon config should look like this:
     },
     "options": {
         "layers": [{
-            url: "http://ns3271887.ovh.net/geoserver/cigalsace/wms",
-            name: "BD_Ortho_2011_RVB"
+            "url": "http://ns3271887.ovh.net/geoserver/cigalsace/wms",
+            "name": "BD_Ortho_2011_RVB",
+            "title" : "BD Ortho"
         }, {
-            url: "http://sdi.georchestra.org/geoserver/wms",
-            name: "nasa:srtm3"
+            "url": "http://sdi.georchestra.org/geoserver/wms",
+            "name": "nasa:srtm3"
         }, {
-            url: "http://sdi.georchestra.org/geoserver/wms",
-            name: "nasa:srtm3_shade"
+            "url": "http://sdi.georchestra.org/geoserver/wms",
+            "name": "nasa:srtm3_shade"
         }, {
-            url: "http://sdi.georchestra.org/geoserver/wms",
-            name: "nasa:night_2012"
+            "url": "http://sdi.georchestra.org/geoserver/wms",
+            "name": "nasa:night_2012"
         }, {
-            url: "http://sdi.georchestra.org/geoserver/wms",
-            name: "osm:bing"
+            "url": "http://sdi.georchestra.org/geoserver/wms",
+            "name": "osm:bing"
         }]
     }
 }
 ```
+
+Note that layer title is not mandatory.
+If not provided, it's obtained from the capabilities document.

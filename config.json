@@ -12,21 +12,29 @@
     "description": {
         "en": "Opacity Slider between to list of backgrounds layers",
         "es": "Opacity Slider between to list of backgrounds layers",
-        "fr": "Slider gérant un fondu transparent entre 2 couches de fonds choisies parmis des listes",
+        "fr": "Curseur permettant un fondu transparent entre 2 couches, à choisir parmi une sélection.",
         "de": "Schieberegler bearbeitet die Transparenz zwischen zwei aus der Liste gewählten Hintergrundlayers"
     },
     "options": {
         "backgroundColor": "rgba(0, 108, 167, 0.5)",
         "layers": [{
+            "url": "https://www.geograndest.fr/geoserver/gwc/service/wmts",
+            "name": "region-grand-est:CRL_ORTHORVB_2015_54_TIFA_L93",
+            "type": "WMTS",
+            "title": "Test WMTS"
+          },{
             "url": "http://osm.geobretagne.fr/gwc01/service/wms",
+            "type": "WMS",
             "name": "osm:google",
             "title": "OSM style Google"
         }, {
             "url": "http://osm.geobretagne.fr/gwc01/service/wms",
+            "type": "WMS",
             "name": "osm:map",
             "title": "OSM style défaut"
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "composite:CIGAL_OMBRAGE_COMPOSITE",
             "title": "Ombrage grisé",
             "metadataURLs": [{
@@ -36,6 +44,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "ref:REF_EUDEM30_COL_2013_TIFLZW_ETRS80",
             "title": "Ombrage colorisé",
             "metadataURLs": [{
@@ -45,6 +54,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "composite:CIGAL_RASTER_COMPOSITE",
             "title": "Vue du ciel",
             "metadataURLs": [{
@@ -54,6 +64,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "geograndest:CIGAL_ORTHO_HISTO_1950_51_ALS_TIF_CC48",
             "title": "ORTHO 1950-51",
             "metadataURLs": [{
@@ -63,6 +74,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "geograndest:CIGAL_ORTHORVB_1997_1998_ALSACE_TIF_A_C48",
             "title": "ORTHO 97 98",
             "metadataURLs": [{
@@ -72,6 +84,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "geograndest:CIGAL_ORTHORVB_2002_ALSACE_TIFA_CC48",
             "title": "ORTHO 2002",
             "metadataURLs": [{
@@ -81,6 +94,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "geograndest:CIGAL_ORTHORVB_2007_ALSACE_TIFA_CC48",
             "title": "ORTHO 2007",
             "metadataURLs": [{
@@ -90,6 +104,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "geograndest:CIGAL_ORTHORVB_2011_12_ALS_TIF_CC48",
             "title": "ORTHO 2011-12",
             "metadataURLs": [{
@@ -99,6 +114,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "type": "WMS",
             "name": "geograndest:CIGAL_ORTHORVB_2015_ALSACE_TIF_L93",
             "title": "ORTHO 2015",
             "metadataURLs": [{
@@ -108,6 +124,7 @@
             }]
         }, {
             "url": "https://www.geograndest.fr/geoserver/pci/gwc/service/wms",
+            "type": "WMS",
             "name": "pci:cadastre_2017",
             "title": "Cadastre 67",
             "metadataURLs": [{
@@ -117,6 +134,7 @@
             }]
         }, {
             "url": "https://wxs.ign.fr/ps5fq8ntj79n7zi4q3jmes5i/geoportail/r/wms",
+            "type": "WMS",
             "name": "CADASTRALPARCELS.PARCELS",
             "title": "IGN Cadastre"
         }]

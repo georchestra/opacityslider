@@ -49,15 +49,15 @@ GEOR.MapOpacitySlider = Ext.extend(Ext.Toolbar, {
         var layersInitModule = new GEOR.LayersInit({
             layersCfg: this.layersCfg,
             listeners: {
-                load: {
-                    fn : function(store) {
-                        this.loadStores(store);
-                        this.checkDisablement();
-                    },
-                    scope: this
-                }
+                load: function(store) {
+                    // load layer newly created store records into each combo store:
+                    this.loadStores(store);
+                    this.checkDisablement();
+                },
+                scope: this
             }
         });
+        // triggers GetCapabilities requests:
         layersInitModule.loadLayers();
 
         this.initBaselayerCombo();

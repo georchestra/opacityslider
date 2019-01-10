@@ -27,119 +27,23 @@
             "title": "Natural Earth",
             "attribution": "Tiles &copy; <a href='http://mapbox.com/'>MapBox</a>",
             "type": "XYZ"
-          },{
+        }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wmts",
             "name": "region-grand-est:CRL_ORTHORVB_2015_54_TIFA_L93",
             "type": "WMTS",
             "title": "Test WMTS"
-          },{
-            "url": "http://osm.geobretagne.fr/gwc01/service/wms",
-            "type": "WMS",
-            "name": "osm:google",
-            "title": "OSM style Google"
         }, {
             "url": "http://osm.geobretagne.fr/gwc01/service/wms",
             "type": "WMS",
-            "name": "osm:map",
-            "title": "OSM style défaut"
+            "name": "osm:google"
         }, {
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
             "type": "WMS",
             "name": "composite:CIGAL_OMBRAGE_COMPOSITE",
             "title": "Ombrage grisé",
             "metadataURLs": [{
-                "format": "text/plain",
+                "format": "text/html",
                 "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-OMBRAGE-COMPOSITE-CIGAL",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
-            "type": "WMS",
-            "name": "ref:REF_EUDEM30_COL_2013_TIFLZW_ETRS80",
-            "title": "Ombrage colorisé",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-EUDEM30-TERR-EAU_2013",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
-            "type": "WMS",
-            "name": "composite:CIGAL_RASTER_COMPOSITE",
-            "title": "Vue du ciel",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-CIGAL_RASTER_COMPOSITE",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
-            "type": "WMS",
-            "name": "geograndest:CIGAL_ORTHO_HISTO_1950_51_ALS_TIF_CC48",
-            "title": "ORTHO 1950-51",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-IGNF_BDORTHOHistor50-51_1-0-CIGAL",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
-            "type": "WMS",
-            "name": "geograndest:CIGAL_ORTHORVB_1997_1998_ALSACE_TIF_A_C48",
-            "title": "ORTHO 97 98",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-ORTHO-RVB-1997-1998-CIGAL",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
-            "type": "WMS",
-            "name": "geograndest:CIGAL_ORTHORVB_2002_ALSACE_TIFA_CC48",
-            "title": "ORTHO 2002",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-ORTHO-RVB-2002-CIGAL",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
-            "type": "WMS",
-            "name": "geograndest:CIGAL_ORTHORVB_2007_ALSACE_TIFA_CC48",
-            "title": "ORTHO 2007",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-ORTHO-RVB-2007-CIGAL",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
-            "type": "WMS",
-            "name": "geograndest:CIGAL_ORTHORVB_2011_12_ALS_TIF_CC48",
-            "title": "ORTHO 2011-12",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-ORTHO-RVB-20112012-CIGAL",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
-            "type": "WMS",
-            "name": "geograndest:CIGAL_ORTHORVB_2015_ALSACE_TIF_L93",
-            "title": "ORTHO 2015",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-180067019_IGNF_ORTHOHR_RVB_CIGAL_2015",
-                "type": "TC211"
-            }]
-        }, {
-            "url": "https://www.geograndest.fr/geoserver/pci/gwc/service/wms",
-            "type": "WMS",
-            "name": "pci:cadastre_2017",
-            "title": "Cadastre 67",
-            "metadataURLs": [{
-                "format": "text/plain",
-                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-226-700-011-080",
                 "type": "TC211"
             }]
         }, {

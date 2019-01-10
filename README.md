@@ -28,6 +28,7 @@ The addon config should look like this:
     "options": {
         "backgroundColor": "rgba(0, 108, 167, 0.5)",
         "layers": [{
+            "type": "XYZ",
             "url": [
                 "http://a.tiles.mapbox.com/v3/mapbox.natural-earth-hypso-bathy/${z}/${x}/${y}.png",
                 "http://b.tiles.mapbox.com/v3/mapbox.natural-earth-hypso-bathy/${z}/${x}/${y}.png",
@@ -35,18 +36,26 @@ The addon config should look like this:
                 "http://d.tiles.mapbox.com/v3/mapbox.natural-earth-hypso-bathy/${z}/${x}/${y}.png"
             ],
             "title": "Natural Earth",
-            "attribution": "Tiles &copy; <a href='http://mapbox.com/'>MapBox</a>",
-            "type": "XYZ"
-        },{
+            "attribution": "Tiles &copy; <a href='http://mapbox.com/'>MapBox</a>"
+        }, {
+            "type": "WMTS",
             "url": "https://www.geograndest.fr/geoserver/gwc/service/wmts",
             "name": "region-grand-est:CRL_ORTHORVB_2015_54_TIFA_L93",
-            "type": "WMTS",
             "title": "Ortho 2015"
-        },{
-            "url": "http://osm.geobretagne.fr/gwc01/service/wms",
+        }, {
             "type": "WMS",
-            "name": "osm:google",
-            "title": "OSM style Google"
+            "url": "https://www.geograndest.fr/geoserver/gwc/service/wms",
+            "name": "composite:CIGAL_OMBRAGE_COMPOSITE",
+            "title": "Ombrage grisé",
+            "metadataURLs": [{
+                "format": "text/html",
+                "href": "https://www.geograndest.fr/geonetwork/srv/fre/catalog.search#/metadata/FR-236700019-OMBRAGE-COMPOSITE-CIGAL",
+                "type": "TC211"
+            }]
+        }, {
+            "type": "WMS",
+            "url": "http://osm.geobretagne.fr/gwc01/service/wms",
+            "name": "osm:google"
         }]
     }
 }

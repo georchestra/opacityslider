@@ -126,7 +126,7 @@ GEOR.MapOpacitySlider = Ext.extend(Ext.Toolbar, {
             inverse: true,
             disabled: true,
             aggressive: true,
-            changeVisibility: true,
+            changeVisibility: false, // to prevent layer reloading
             maxvalue: 100,
             style: "margin-right: 10px;margin-left: 10px;"
         });
